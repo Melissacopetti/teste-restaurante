@@ -1,4 +1,8 @@
-
+import { orderRouter } from './router/orderRouter';
+import { foodRouter} from "./router/foodRouter";
+import { drinkRouter} from "./router/drinkRouter";
+import { pingRouter } from "./router/pingRouter";
+import { wineRouter} from "./router/wineRouter";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";

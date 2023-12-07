@@ -1,8 +1,9 @@
-
+import { orderRouter } from './router/orderRouter';
+import { foodRouter} from "./router/pizzaRouter";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-
+import { pingRouter } from "./router/pingRouter";
 
 dotenv.config();
 
@@ -15,7 +16,5 @@ app.listen(process.env.PORT || 3003, () => {
 });
 
 app.use("/ping", pingRouter);
-app.use("/api/food", foodRouter);
-app.use("/api/drink", drinkRouter);
-app.use("/api/food", wineRouterRouter);
+app.use("/api/pizza", pizzaRouter);
 app.use("/api/orders",orderRouter);

@@ -1,4 +1,8 @@
-
+import { orderRouter } from './router/orderRouter';
+import { foodRouter} from "./router/foodRouter";
+import { drinkRouter} from "./router/drinkRouter";
+import { pingRouter } from "./router/pingRouter";
+import { wineRouter} from "./router/wineRouter";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -17,5 +21,5 @@ app.listen(process.env.PORT || 3003, () => {
 app.use("/ping", pingRouter);
 app.use("/api/food", foodRouter);
 app.use("/api/drink", drinkRouter);
-app.use("/api/food", wineRouterRouter);
+app.use("/api/food", wRouter);
 app.use("/api/orders",orderRouter);

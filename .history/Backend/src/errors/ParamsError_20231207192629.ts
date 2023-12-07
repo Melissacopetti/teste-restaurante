@@ -1,4 +1,4 @@
-import { BaseError } from "./BaseError";
+mport { BaseError } from "./BaseError";
 
 export class ParamsError extends BaseError {
     constructor(

@@ -2,7 +2,7 @@ import { IFoodDB, Food } from "../models/Food";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class FoodDatabase extends BaseDatabase {
-  public static TABLE_FOODS = "comida";
+  public static TABLE_FOODS = "NomeDaSuaTabelaDeComidas";
 
   public toFoodDBModel = (food: Food): IFoodDB => {
     return {

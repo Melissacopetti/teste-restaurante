@@ -1,4 +1,4 @@
-import { IOrderItemDB, IOrderDB } from "../models/Order";
+import { IOrderItemDB, IOrdersDB } from "../models/Order";
 import { BaseDatabase } from "./BaseDatabase";
 import { FoodDatabase } from "./FoodDatabase";
 import { DrinkDatabase } from "./DrinkDatabase";
@@ -20,8 +20,8 @@ export class OrderDatabase extends BaseDatabase {
     );
   };
 
-  public getOrders = async (): Promise<IOrderDB[]> => {
-    const result: IOrderDB[] = await BaseDatabase.connection(
+  public getOrders = async (): Promise<IOrdersDB[]> => {
+    const result: IOrdersDB[] = await BaseDatabase.connection(
       OrderDatabase.TABLE_ORDERS
     ).select();
     return result;

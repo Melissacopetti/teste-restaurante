@@ -2,7 +2,7 @@ import { IDrinkDB, Drink } from "../models/Drink";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class DrinkDatabase extends BaseDatabase {
-  public static TABLE_DRINKS = "bebidas";
+  public static TABLE_DRINKS = "NomeDaSuaTabelaDeBebidas";
 
   public toDrinkDBModel = (drink: Drink): IDrinkDB => {
     return {
@@ -22,5 +22,5 @@ export class DrinkDatabase extends BaseDatabase {
     return result;
   };
 
- 
+  // Adapte conforme necessário para buscar os ingredientes ou realizar outras operações relacionadas às bebidas
 }

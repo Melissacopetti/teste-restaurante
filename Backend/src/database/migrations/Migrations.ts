@@ -1,43 +1,21 @@
 import { BaseDatabase } from "../BaseDatabase";
-import { FoodDataBase } from "../FoodDataBase";
-import { DrinkDataBase } from "../DrinkDataBase";
-import { WineDataBase } from "../WineDataBase";
+import { FoodDatabase } from "../FoodDatabase";
+import { DrinkDatabase } from "../DrinkDatabase";
+import { WineDatabase } from "../WineDatabase";
 import { OrderDatabase } from "../OrderDatabase";
 import { drinksSeed, foodsSeed, winesSeed } from "./data";
 
 class Migrations extends BaseDatabase {
-  execute = async () => {
-    try {
-      console.log("Creating tables...");
-      await this.createTables();
-      console.log("Tables created successfully.");
-
-      console.log("Populating tables...");
-      await this.insertData();
-      console.log("Tables populated successfully.");
-
-      console.log("Migrations completed.");
-    } catch (error) {
-      console.log("FAILED! Error in migrations...");
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
-    } finally {
-      console.log("Ending connection...");
-      BaseDatabase.connection.destroy();
-      console.log("Connection closed graciously.");
-    }
-  };
 
   createTables = async () => {
     await BaseDatabase.connection.raw(`
         DROP TABLE IF EXISTS ${OrderDatabase.TABLE_ORDERS};
-        DROP TABLE IF EXISTS ${FoodDataBase.TABLE_FOODS};
-        DROP TABLE IF EXISTS ${DrinkDataBase.TABLE_DRINKS};
-        DROP TABLE IF EXISTS ${WineDataBase.TABLE_WINES};
+        DROP TABLE IF EXISTS ${FoodDatabase.TABLE_FOODS};
+        DROP TABLE IF EXISTS ${DrinkDatabase.TABLE_DRINKS};
+        DROP TABLE IF EXISTS ${WineDatabase.TABLE_WINES};
         DROP TABLE IF EXISTS ${OrderDatabase.TABLE_ORDER_ITEMS};
 
-        CREATE TABLE IF NOT EXISTS ${FoodDataBase.TABLE_FOODS} (
+        CREATE TABLE IF NOT EXISTS ${FoodDatabase.TABLE_FOODS} (
             id VARCHAR(255) PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             descricao TEXT,
@@ -46,7 +24,7 @@ class Migrations extends BaseDatabase {
             tipo VARCHAR(255) NOT NULL
         );
 
-        CREATE TABLE IF NOT EXISTS ${DrinkDataBase.TABLE_DRINKS} (
+        CREATE TABLE IF NOT EXISTS ${DrinkDatabase.TABLE_DRINKS} (
             id VARCHAR(255) PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             descricao TEXT,
@@ -55,7 +33,7 @@ class Migrations extends BaseDatabase {
             tipo VARCHAR(255) NOT NULL
         );
 
-        CREATE TABLE IF NOT EXISTS ${WineDataBase.TABLE_WINES} (
+        CREATE TABLE IF NOT EXISTS ${WineDatabase.TABLE_WINES} (
             id VARCHAR(255) PRIMARY KEY,
             nome VARCHAR(255) NOT NULL,
             descricao TEXT,
@@ -74,29 +52,34 @@ class Migrations extends BaseDatabase {
             item_type VARCHAR(255) NOT NULL,
             quantity INT,
             order_id VARCHAR(255) NOT NULL,
-            FOREIGN KEY (item_id) REFERENCES ${FoodDataBase.TABLE_FOODS}(id),
-            FOREIGN KEY (item_id) REFERENCES ${DrinkDataBase.TABLE_DRINKS}(id),
-            FOREIGN KEY (item_id) REFERENCES ${WineDataBase.TABLE_WINES}(id),
+            FOREIGN KEY (item_id) REFERENCES ${FoodDatabase.TABLE_FOODS}(id),
+            FOREIGN KEY (item_id) REFERENCES ${DrinkDatabase.TABLE_DRINKS}(id),
+            FOREIGN KEY (item_id) REFERENCES ${WineDatabase.TABLE_WINES}(id),
             FOREIGN KEY (order_id) REFERENCES ${OrderDatabase.TABLE_ORDERS}(id)
         );
        `);
   };
 
   insertData = async () => {
-    await BaseDatabase.connection(FoodDataBase.TABLE_FOODS).insert(
+    await BaseDatabase.connection(FoodDatabase.TABLE_FOODS).insert(
       foodsSeed
     );
 
-    await BaseDatabase.connection(DrinkDataBase.TABLE_DRINKS).insert(
+    await BaseDatabase.connection(DrinkDatabase.TABLE_DRINKS).insert(
       drinksSeed
     );
 
-    await BaseDatabase.connection(WineDataBase.TABLE_WINES).insert(
+    await BaseDatabase.connection(WineDatabase.TABLE_WINES).insert(
       winesSeed
     );
 
+  }
+
+  execute = async () => {
+    await this.createTables();
+    await this.insertData();
+  };
 }
 
 const migrations = new Migrations();
 migrations.execute();
-}]friiuyy

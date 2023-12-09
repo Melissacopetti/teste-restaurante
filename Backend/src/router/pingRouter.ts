@@ -8,4 +8,4 @@ const pingController = new PingController(
     new PingBusiness()
 )
 
-pingRouter.get("/", pingController.ping)
+pingRouter.get("/pong", pingController.ping)

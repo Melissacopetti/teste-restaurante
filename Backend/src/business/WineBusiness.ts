@@ -11,22 +11,22 @@ export class WineBusiness {
   
     public getWines = async (): Promise<IGetWinesOutputDTO> => {
       const winesDB = await this.wineDatabase.getWines();
-  
       const wines: Wine[] = [];
 
-    for (let wineDB of winesDB) {
-      const wine = new Wine(
-        wineDB.nome,
-        wineDB.descricao,
-        wineDB.valor,
-        wineDB.imagem_url,
-        wineDB.tipo
-      );
 
-      wines.push(wine);
-    }
+      for (let wineDB of winesDB) {
+        const wine = new Wine(
+          wineDB.nome,
+          wineDB.descricao || "", // Tratar undefined como string vazia
+          wineDB.valor,
+          wineDB.imagem_url,
+          wineDB.tipo
+        );
+  
+        wines.push(wine);
+      }
 
-    const response: IGetWinesOutputDTO = {
+      const response: IGetWinesOutputDTO = {
         message: "Vinhos retornados com sucesso",
         wines: wines.map((wine) => ({
           name: wine.getName(),

@@ -10,5 +10,5 @@ const wineController = new WineController(
   new WineBusiness(new WineDatabase(), new IdGenerator())
 );
 
-wineRouter.get("/", wineController.getWines);
-// Adicione outras rotas específicas para vinhos, se necessário
+wineRouter.get("/wines", wineController.getWines);
+

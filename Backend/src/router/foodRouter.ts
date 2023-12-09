@@ -10,5 +10,5 @@ const foodController = new FoodController(
   new FoodBusiness(new FoodDatabase(), new IdGenerator())
 );
 
-foodRouter.get("/", foodController.getFoods);
+foodRouter.get("/foods", foodController.getFoods);
 // Adicione outras rotas específicas para comidas, se necessário

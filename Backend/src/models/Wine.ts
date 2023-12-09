@@ -28,9 +28,9 @@ export interface IWineDB {
     message: string;
     wines: {
       name: string;
-      description: string;
+      description: string | undefined;
       price: number;
-      imageUrl: string | null;
+      imageUrl: string | undefined;
       type: string;
     }[];
   }

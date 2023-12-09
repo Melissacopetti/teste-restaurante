@@ -10,5 +10,5 @@ const drinkController = new DrinkController(
   new DrinkBusiness(new DrinkDatabase(), new IdGenerator())
 );
 
-drinkRouter.get("/", drinkController.getDrinks);
+drinkRouter.get("/drinks", drinkController.getDrinks);
 // Adicione outras rotas específicas para bebidas, se necessário

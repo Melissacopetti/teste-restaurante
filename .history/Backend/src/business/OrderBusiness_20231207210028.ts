@@ -52,7 +52,7 @@ import {
           item_name: item.name,
           item_type: item.type, // Adicione o tipo do item
           quantity: item.quantity,
-          order_id: orderId,
+          order_id: item.orderId,
         };
         await this.orderDatabase.insertItemOnOrder(orderItem);
       }
@@ -68,6 +68,7 @@ import {
             type: item.type, // Adicione o tipo do item
             quantity: item.quantity,
             price: item.price,
+            orderId:item.orderId
           })),
           total,
         },
